@@ -218,7 +218,7 @@ void main_menu(Tree *tree) {
 
 
 int main(int argc, char *argv[]) {
-
+    printf("Lo que sea");
     Tree T;
     init_tree(&T);
 
