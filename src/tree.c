@@ -34,14 +34,15 @@ Node *createNode(char *word) {
 
 Node *insertNode(Node *node, char *word) {
     if (node == NULL) {
-
         node = createNode(word);
     } else {
         if (strcmp(word, node->data) > 0) {
+            Node *new_node = insertNode(node->right,word);
+            node->right = new_node;
 
-            // TO DO
         } else if (strcmp(word, node->data) < 0) {
-            // TO DO
+            Node *new_node = insertNode(node->left,word);
+            node->left = new_node;
         }
     }
     return node;
@@ -56,9 +57,11 @@ Node *findNode(Node *node, char *word) {
 
 bool insert_into_tree(Tree *t, char *word) {
     // TO DO
-
-    /*!!! change to true when completed !!!*/
-    return FALSE;
+    if (findNode(t->root,word) ==NULL){
+        insertNode(t->root,word);
+        return true;
+    }
+    return false;
 }
 
 void printPreOrder(Node *node) {

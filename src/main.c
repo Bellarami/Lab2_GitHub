@@ -105,7 +105,7 @@ void menu_add_new_word(Tree *tree) {
         if (insert_into_tree(tree, word)) {
             printf("New word is added!\n");
         } else {
-            printf("Error! The word \"%s\" already exists.\n", word);
+            printf("Error! The word \"%s\" already exists.\n", word); //Aqui nunca va a entrar!!!!!
         }
     }
 }
