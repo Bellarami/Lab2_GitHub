@@ -94,6 +94,7 @@ void menu_find_word(Tree *tree) {
  * Add a word into the dictionary
  */
 void menu_add_new_word(Tree *tree) {
+
     char word[MAX_WORD_LENGTH];
     scan_line("Enter word: ", "%s", word);
 
@@ -202,10 +203,18 @@ void main_menu(Tree *tree) {
                 check_spelling_menu(tree);
                 break;
             case PRE_ORDER: // print the whole dictionary pre order
-                 printf("TO DO!\n\n");;
+                if (tree->size>0){
+                    printPreOrder(tree->root);
+                }else{
+                    printf("The dictionary is empty!\n");
+                }
                 break;
             case POST_ORDER: // print the whole dictionary post order
-                printf("TO DO!\n\n");
+                if (tree->size>0){
+                    printPostOrder(tree->root);
+                }else{
+                    printf("The dictionary is empty!\n");
+                }
                 break;
             case EXIT: // Exit the program
                 printf("Closing The Application...\n");
