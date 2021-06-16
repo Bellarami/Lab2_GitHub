@@ -45,6 +45,8 @@ Node *insertNode(Node *node, char *word);
 
 Node* deleteNode(Node *root, char *word);
 
+Node* getMinimum(Node* node );
+
 void print_tree(Tree *t);
 void printInOrder(Node *node);
 void printPreOrder(Node *node);

@@ -118,9 +118,9 @@ void printInOrder(Node *node) {
     if (node==NULL){
         return;
     }else{
-        printPostOrder(node->left);
+        printInOrder(node->left);
         printf("%s \n",node->data);
-        printPostOrder(node->right);
+        printInOrder(node->right);
     }
 }
 
@@ -133,20 +133,68 @@ char *find_in_tree(Tree *t, char *word) {
 
 Node* deleteNode(Node *root, char *word){
      // TO DO
-    printf("putiisimo ansu");
 
-     Node * node_to_delete = findNode(root,word);
-     if (node_to_delete== NULL){
-         return NULL;
-     } else{
 
-         if (node_to_delete->right==NULL && node_to_delete->left==NULL){ //Leaf
 
-             free(node_to_delete);
-         }
-     }
+    Node* new_node=NULL;
+    if (root == NULL) {
+        printf("It doesn't belong to this dictionary");
+
+    } else {
+
+        if (strcmp(word, root->data) > 0) {
+
+            new_node = deleteNode(root->right,word);
+            root->right = new_node;
+            return root;
+
+        } else if (strcmp(word, root->data) < 0) {
+            new_node = deleteNode(root->left,word);
+            root->left = new_node;
+            return root;
+        } else{  // lo ha encontrado
+
+            if (root->right==NULL && root->left==NULL){ //Leaf
+                free(root);
+                new_node = NULL;
+            } else if (root->right!=NULL && root->left==NULL){ //ARBOL SOLO EN LA DERECHA
+                new_node= root->right;
+                free(root);
+
+            } else if (root->left!=NULL && root->right==NULL) { //ARBOL SOLO EN LA IZQUIERDA
+                new_node = root->left;
+                free(root);
+            } else if (root->right!=NULL && root->left!=NULL){ //TIENE DOS HIJOS ROOT
+
+                printf("\n CUIDADO BRO ahi vienee!!!\n");
+                Node *temp=getMinimum(root->left);
+
+                new_node= createNode(temp->data);
+                new_node->left=root->left;
+                new_node->right=root->right;
+
+
+                deleteNode(root,temp->data);
+                free(root);
+            }
+
+        }
+    }
+
+    return new_node;
+
 }
+Node* getMinimum(Node* node ){
+    char * curr=node->data;
+    char* next= node->right->data;
+    if (node->right==NULL){
+        return node;
+    } else{
+        return getMinimum(node->right);
+    }
 
+
+}
 int size_tree(Tree *t) {
     printf("Printing size...\n");
     return t->size;
