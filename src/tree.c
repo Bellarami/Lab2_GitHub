@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <generate_candidates.h>
 #include "utils.h"
 #include "commons.h"
 #include "tree.h"
+
 
 
 void init_tree(Tree *t) {
@@ -124,6 +126,36 @@ void printInOrder(Node *node) {
     }
 }
 
+
+void checkInOrder(Node *node, Tree* dictionary) {
+    // TO DO
+
+    if (node == NULL) {
+        return;
+    } else {
+        checkInOrder(node->left,dictionary);
+
+        //checking
+        if (find_in_tree(dictionary, node->data) != NULL) {
+            printf("%s is correct!\n", node->data);
+        } else {
+            printf("%s is wrong\n",node->data);
+            Tree substitutes;
+            generate_candidates(node->data, dictionary, &substitutes);
+            if (substitutes.size > 0) {
+                printf("Substitutes:\n");
+                printInOrder(substitutes.root);
+            } else {
+                printf("Substitutes list is empty !\n");
+            }
+            clear_tree(&substitutes);
+        }
+        printf("\n");
+
+        checkInOrder(node->right,dictionary);
+    }
+}
+
 char *find_in_tree(Tree *t, char *word) {
 
     Node *elem = findNode(t->root, word);
@@ -133,9 +165,6 @@ char *find_in_tree(Tree *t, char *word) {
 
 Node* deleteNode(Node *root, char *word){
      // TO DO
-
-
-
     Node* new_node=NULL;
     if (root == NULL) {
         printf("It doesn't belong to this dictionary");
@@ -185,8 +214,6 @@ Node* deleteNode(Node *root, char *word){
 
 }
 Node* getMinimum(Node* node ){
-    char * curr=node->data;
-    char* next= node->right->data;
     if (node->right==NULL){
         return node;
     } else{

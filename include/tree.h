@@ -47,6 +47,8 @@ Node* deleteNode(Node *root, char *word);
 
 Node* getMinimum(Node* node );
 
+void checkInOrder(Node *node, Tree* dictionary);
+
 void print_tree(Tree *t);
 void printInOrder(Node *node);
 void printPreOrder(Node *node);

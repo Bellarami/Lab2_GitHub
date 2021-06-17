@@ -23,6 +23,7 @@
 #define CHECK_SPELLING 6
 #define PRE_ORDER 7
 #define POST_ORDER 8
+#define TAREA_3 9
 #define EXIT 0
 #define INVALID_OPTION -1
 

@@ -17,7 +17,7 @@
 /*
  * Load the dictionary from a database file
  */
-void load_dictionary(Tree *tree, char *filepath) {
+bool load_dictionary(Tree *tree, char *filepath) {
 
     FILE *fd = fopen(filepath, "r");
     if (fd != NULL) {
@@ -38,8 +38,10 @@ void load_dictionary(Tree *tree, char *filepath) {
         }
         fclose(fd);
         printf("Loaded! There are %d new entries.\n", count);
+        return true;
     } else {
         printf("Error! Could not load data, check file '%s' is not missing.\n", filepath);
+        return false;
     }
 }
 
@@ -163,6 +165,41 @@ void menu_delete_word(Tree *tree) {
         printf("Choose option 1 to load a dictionary.\n");
     }
 }
+
+
+/*
+ * TASK 3 MENU
+ */
+
+void task_3_menu(Tree *dictionary_correcter){
+    Tree tree_to_correct;
+    init_tree(&tree_to_correct);
+
+    char file_name[MAX_PATH_LENGTH];
+    char name[MAX_WORD_LENGTH];
+
+    printf("\n");
+    printf("Which file do you want to check it's spelling?\n");
+    scanf("%s", name);
+    flush_input();
+
+    strcpy(file_name, "");
+    strcat(file_name, BASE_DATA_DIR);
+    strcat(file_name, SEP_TAB);
+    strcat(file_name, name);
+
+    printf("Loading words from file: %s\n", file_name);
+
+    bool check =load_dictionary(&tree_to_correct, file_name);
+
+    if (check){
+        printf("Dictionary to correct loaded!\n");
+        printf("=============check=============\n\n");
+        checkInOrder(tree_to_correct.root,dictionary_correcter);
+
+    }
+    clear_tree(&tree_to_correct);
+}
 /*
  * Main menu
  */
@@ -179,6 +216,7 @@ void main_menu(Tree *tree) {
         printf("6. Check spelling\n");
         printf("7. Display dictionary  (preOrder)\n");
         printf("8. Display dictionary  (postOrder)\n");
+        printf("9. Task 3\n");
         printf("0. Exit\n");
         printf("==========================\n");
         option = read_int_option("Choose an option: ");
@@ -215,6 +253,9 @@ void main_menu(Tree *tree) {
                 }else{
                     printf("The dictionary is empty!\n");
                 }
+                break;
+            case TAREA_3:
+                task_3_menu(tree);
                 break;
             case EXIT: // Exit the program
                 printf("Closing The Application...\n");

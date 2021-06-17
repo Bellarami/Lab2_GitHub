@@ -10,6 +10,7 @@
 
 //#define INFO_FILE_PATH "../data/data_dict.tsv"
 //#define QUERY_FILE_PATH "../data/data_list.tsv"
+void task_3_menu(Tree *dictionary_correcter);
 
 
 #endif /* MAIN_H */
