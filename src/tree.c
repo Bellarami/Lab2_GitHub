@@ -193,7 +193,7 @@ Node* deleteNode(Node *root, char *word){
                 free(root);
             } else if (root->right!=NULL && root->left!=NULL){ //TIENE DOS HIJOS ROOT
 
-                printf("\n CUIDADO BRO ahi vienee!!!\n");
+
                 Node *temp=getMinimum(root->left);
 
                 new_node= createNode(temp->data);
