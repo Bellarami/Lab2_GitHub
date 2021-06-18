@@ -254,6 +254,7 @@ void main_menu(Tree *tree) {
                     printf("The dictionary is empty!\n");
                 }
                 break;
+                //TASK 3
             case TAREA_3:
                 task_3_menu(tree);
                 break;

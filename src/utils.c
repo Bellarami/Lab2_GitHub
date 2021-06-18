@@ -1,7 +1,7 @@
 #include "utils.h"
 
 /**
- * TODO: Convert upper case to lower case
+ *  Convert upper case to lower case
  * Modifies the given string mapping all characters in [A-Z] to [a-z].
 */
 void str_to_lowercase(char *s) {

@@ -15,7 +15,6 @@ void init_tree(Tree *t) {
 }
 
 void clearPostOrder(Node *node) {
-    //TODO: esto
     if (node==NULL){
         return;
     }else{
@@ -126,7 +125,7 @@ void printInOrder(Node *node) {
     }
 }
 
-
+//TASK 3 FUNCTION
 void checkInOrder(Node *node, Tree* dictionary) {
     // TO DO
 
@@ -159,8 +158,7 @@ void checkInOrder(Node *node, Tree* dictionary) {
 char *find_in_tree(Tree *t, char *word) {
 
     Node *elem = findNode(t->root, word);
-    return (char *) elem->data;
-    //TODO: Mirar si esta modificacion no afecta
+    return (char *) elem->data; //esto fue una recomendación propia del CLion
 }
 
 Node* deleteNode(Node *root, char *word){
